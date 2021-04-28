@@ -37,6 +37,14 @@ class Connect
     {
         $this->pdo = null;
     }
+
+    public function __destruct ()
+    {
+        // TODO: Implement __destruct() method.
+        $this->closeConnect();
+    }
+
+
 }
 
 ?>
