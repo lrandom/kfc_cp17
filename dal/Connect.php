@@ -23,7 +23,9 @@ class Connect
     {
         try {
             $this->pdo = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPass);
+            $this->pdo->exec('SET NAMES utf8');
         } catch (PDOException $e) {
+            echo $e->getMessage();
             echo 'Lỗi kết nối CSDL';
         }
     }

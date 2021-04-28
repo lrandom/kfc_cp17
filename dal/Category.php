@@ -1,5 +1,6 @@
 <?php
 require_once 'Connect.php';
+require_once 'IDal.php';
 
 class Category extends Connect implements IDal
 {
@@ -38,6 +39,7 @@ class Category extends Connect implements IDal
     public function delete ($id)
     {
         // TODO: Implement delete() method.
+        $this->pdo->query("DELETE from $this->tableName where id=$id");
     }
 
 
