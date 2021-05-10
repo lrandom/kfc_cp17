@@ -28,18 +28,51 @@ class Category extends Connect implements IDal
 
     public function add ($arr)
     {
-        // TODO: Implement add() method.
+        //var_dump($arr);
+        try {
+            // TODO: Implement add() method.
+            $sql = "INSERT INTO $this->tableName(name) VALUES(:name)";
+            //var_dump($sql);
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(':name', $name);
+            $name = $arr['name'];
+            //var_dump($name);
+            $stm->execute();
+        } catch (Exception $e) {
+            var_dump($e);
+        }
     }
 
-    public function update ($id, $arr)
+    public function update ($idx, $arr)
     {
         // TODO: Implement update() method.
+        try {
+            // TODO: Implement add() method.
+            $sql = "UPDATE $this->tableName SET name=:name WHERE id=:id";
+            //var_dump($sql);
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(':name', $name);
+            $stm->bindParam(':id', $id);
+            $name = $arr['name'];
+            $id = $idx;
+            $stm->execute();
+        } catch (Exception $e) {
+            var_dump($e);
+        }
     }
 
     public function delete ($id)
     {
         // TODO: Implement delete() method.
         $this->pdo->query("DELETE from $this->tableName where id=$id");
+    }
+
+    public function getById ($id)
+    {
+        // TODO: Implement getById() method.
+        $sql = "SELECT * FROM $this->tableName where id=$id";
+        $rs = $this->pdo->query($sql);
+        return $rs->fetchObject(); //trả về một đối tượng dựa theo id
     }
 
 

@@ -12,6 +12,8 @@ interface IDal
     function delete (
         $id
     );
+
+    public function getById ($id);
 }
 
 ?>

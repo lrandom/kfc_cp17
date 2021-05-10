@@ -20,5 +20,7 @@ H
 :
 
 Config.php,b/e/bee7ca9b3504304df63f9d52e7c943743b5f89d1
-;
-Connect.php,8/3/8338f0c5866d68e01713402cf60a885f7b5cc21d
+?
+dal/Connect.php,1/e/1e1c93816554e14b72438e09d75bd76a3090c0d0
+I
+admin/category/delete.php,a/8/a8145c9e85b2683cf338bd86c6dcab7a0566a705
