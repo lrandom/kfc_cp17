@@ -2,7 +2,8 @@
 
 interface IDal
 {
-    public function getList ();
+
+    public function getList ($page);
 
     public function add ($arr);
 
@@ -14,6 +15,8 @@ interface IDal
     );
 
     public function getById ($id);
+
+    public function getTotalPage ();
 }
 
 ?>

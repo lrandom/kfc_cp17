@@ -5,6 +5,7 @@ require_once 'IDal.php';
 class Category extends Connect implements IDal
 {
     private $tableName = "category";
+    private $perPage = 10;
 
     /**
      * Category constructor.
@@ -14,10 +15,11 @@ class Category extends Connect implements IDal
         parent::__construct();
     }
 
-    public function getList ()
+    public function getList ($page)
     {
+        $offset = $page*10 - 10;
         // TODO: Implement getList() method.
-        $sql = "SELECT * FROM $this->tableName"; //"SELECT * FROM category";
+        $sql = "SELECT * FROM $this->tableName LIMIT $offset,$this->perPage"; //"SELECT * FROM category";
         $rs = $this->pdo->query($sql);//gọi query để lấy về danh sách bản ghi
         $arr = [];
         while ($row = $rs->fetchObject()) {
@@ -73,6 +75,15 @@ class Category extends Connect implements IDal
         $sql = "SELECT * FROM $this->tableName where id=$id";
         $rs = $this->pdo->query($sql);
         return $rs->fetchObject(); //trả về một đối tượng dựa theo id
+    }
+
+    public function getTotalPage ()
+    {
+        // TODO: Implement getTotalPage() method.
+        $sql = "SELECT count(*) as total_row FROM $this->tableName";
+        $rs = $this->pdo->query($sql);
+        $result = $rs->fetchObject();
+        return round($result->total_row/$this->perPage);
     }
 
 

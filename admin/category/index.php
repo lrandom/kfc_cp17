@@ -23,7 +23,14 @@ require_once './../../dal/Category.php';
 
     <?php
     $categoryDal = new Category();
-    $list = $categoryDal->getList();
+    $totalPage = $categoryDal->getTotalPage();
+    $page = isset($_GET['page']) ? $_GET['page'] : 1; //toán tử ba ngôi
+    /*if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }*/
+    $list = $categoryDal->getList($page);
     ?>
     <a href="add.php" class="btn btn-primary">Thêm</a>
     <table class="table">
@@ -54,6 +61,25 @@ require_once './../../dal/Category.php';
 
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <?php
+            for ($i = 1;
+                 $i <= $totalPage;
+                 $i++) {
+                ?>
+                <li class="page-item <?php if ($page == $i) {
+                    echo 'active';
+                } ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php
+            }
+            ?>
+
+
+        </ul>
+    </nav>
 </div>
 </body>
 </html>
