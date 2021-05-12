@@ -1,6 +1,6 @@
 <?php
 require_once './../../Config.php';
-require_once './../../dal/Category.php';
+require_once './../../dal/Food.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,15 +22,15 @@ require_once './../../dal/Category.php';
     ?>
 
     <?php
-    $categoryDal = new Category();
-    $totalPage = $categoryDal->getTotalPage();
+    $foodDal = new Food();
+    $totalPage = $foodDal->getTotalPage();
     $page = isset($_GET['page']) ? $_GET['page'] : 1; //toán tử ba ngôi
     /*if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {
         $page = 1;
     }*/
-    $list = $categoryDal->getList($page);
+    $list = $foodDal->getList($page);
     ?>
     <a href="add.php" class="btn btn-primary">Thêm</a>
     <table class="table">
@@ -38,6 +38,8 @@ require_once './../../dal/Category.php';
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
             <th scope="col">Thao tác</th>
         </tr>
         </thead>
@@ -49,6 +51,8 @@ require_once './../../dal/Category.php';
             <tr>
                 <th scope="row"><?php echo $r->id; ?></th>
                 <td><?php echo $r->name; ?></td>
+                <td><?php echo $r->price; ?></td>
+                <td><?php echo $r->category_name; ?></td>
                 <td>
                     <a href="delete.php?id=<?php echo $r->id; ?>">Xoá</a>
                     <a href="edit.php?id=<?php echo $r->id; ?>">Sửa</a>

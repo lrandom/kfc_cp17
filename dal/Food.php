@@ -2,9 +2,9 @@
 require_once 'Connect.php';
 require_once 'IDal.php';
 
-class Category extends Connect implements IDal
+class Food extends Connect implements IDal
 {
-    private $tableName = "category";
+    private $tableName = "foods";
     private $perPage = 10;
 
     /**
@@ -15,16 +15,15 @@ class Category extends Connect implements IDal
         parent::__construct();
     }
 
-    public function setPerPage ($perPage)
-    {
-        $this->perPage = $perPage;
-    }
-
     public function getList ($page)
     {
-        $offset = $page*$this->perPage - $this->perPage;
+        $offset = $page*10 - 10;
         // TODO: Implement getList() method.
-        $sql = "SELECT * FROM $this->tableName LIMIT $offset,$this->perPage"; //"SELECT * FROM category";
+        $sql = "SELECT *,foods.name as name,foods.id as id, 
+              category.name as category_name
+            FROM $this->tableName 
+            INNER JOIN category ON foods.category_id = category.id    
+                LIMIT $offset,$this->perPage"; //"SELECT * FROM category";
         $rs = $this->pdo->query($sql);//gọi query để lấy về danh sách bản ghi
         $arr = [];
         while ($row = $rs->fetchObject()) {
@@ -38,11 +37,15 @@ class Category extends Connect implements IDal
         //var_dump($arr);
         try {
             // TODO: Implement add() method.
-            $sql = "INSERT INTO $this->tableName(name) VALUES(:name)";
+            $sql = "INSERT INTO $this->tableName(name,price,category_id) VALUES(:name,:price,:category_id)";
             //var_dump($sql);
             $stm = $this->pdo->prepare($sql);
             $stm->bindParam(':name', $name);
+            $stm->bindParam(':price', $price);
+            $stm->bindParam(':category_id', $category_id);
             $name = $arr['name'];
+            $price = $arr['price'];
+            $category_id = $arr['category_id'];
             //var_dump($name);
             $stm->execute();
         } catch (Exception $e) {
@@ -55,18 +58,26 @@ class Category extends Connect implements IDal
         // TODO: Implement update() method.
         try {
             // TODO: Implement add() method.
-            $sql = "UPDATE $this->tableName SET name=:name
-                WHERE id=:id";
+            /*$sql = "UPDATE $this->tableName SET name=:name,
+                 price=:price, 
+                 category_id=:category_id  WHERE id=:id";
             //var_dump($sql);
             $stm = $this->pdo->prepare($sql);
             $stm->bindParam(':name', $name);
+            $stm->bindParam(':price', $price);
+            $stm->bindParam(':category_id', $category_id);
             $stm->bindParam(':id', $id);
 
             $name = $arr['name'];
             $price = $arr['price'];
             $category_id = $arr['category_id'];
             $id = $idx;
-            $stm->execute();
+            $stm->execute();*/
+
+            $sql = 'UPDATE '.$this->tableName.' SET name="'.$arr['name'].'",
+                 price='.$arr['price'].', 
+                 category_id='.$arr['category_id'].'  WHERE id='.$idx;
+            $this->pdo->query($sql);
         } catch (Exception $e) {
             var_dump($e);
         }
