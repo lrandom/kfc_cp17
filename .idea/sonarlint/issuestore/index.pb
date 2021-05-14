@@ -26,3 +26,11 @@ I
 admin/category/delete.php,a/8/a8145c9e85b2683cf338bd86c6dcab7a0566a705
 E
 admin/commons/nav.php,5/9/59ee4419c7bef6072951a8f60baec6ac31344678
+E
+admin/foods/index.php,4/c/4ca977f4e691f14150c657fc4dd0dca60098b111
+C
+admin/foods/add.php,8/c/8c51b8e236cd3eb89b0e7e27faf257c0ef67f5e2
+D
+admin/foods/edit.php,7/0/70b94107b5f20179252cde74daecc840b3850d41
+<
+dal/Food.php,8/3/83e2ea715547707eb225693c84e17a8cd1c7e6d7

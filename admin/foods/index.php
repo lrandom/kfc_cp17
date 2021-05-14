@@ -37,6 +37,7 @@ require_once './../../dal/Food.php';
         <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Ảnh</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Category</th>
@@ -50,6 +51,9 @@ require_once './../../dal/Food.php';
             ?>
             <tr>
                 <th scope="row"><?php echo $r->id; ?></th>
+                <td>
+                    <img src="<?php echo BASE_URL.$r->image_path; ?>" alt="" width="100" height="80">
+                </td>
                 <td><?php echo $r->name; ?></td>
                 <td><?php echo $r->price; ?></td>
                 <td><?php echo $r->category_name; ?></td>

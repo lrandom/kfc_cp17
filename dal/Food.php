@@ -53,6 +53,30 @@ class Food extends Connect implements IDal
         }
     }
 
+    public function addWithImage ($arr, $imagePath)
+    {
+        //var_dump($arr);
+        try {
+            // TODO: Implement add() method.
+            $sql = "INSERT INTO $this->tableName(name,price,category_id,image_path) 
+VALUES(:name,:price,:category_id,:image_path)";
+            //var_dump($sql);
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(':name', $name);
+            $stm->bindParam(':price', $price);
+            $stm->bindParam(':category_id', $category_id);
+            $stm->bindParam(':image_path', $image_path);
+            $name = $arr['name'];
+            $price = $arr['price'];
+            $category_id = $arr['category_id'];
+            $image_path = $imagePath;
+            //var_dump($name);
+            $stm->execute();
+        } catch (Exception $e) {
+            var_dump($e);
+        }
+    }
+
     public function update ($idx, $arr)
     {
         // TODO: Implement update() method.
